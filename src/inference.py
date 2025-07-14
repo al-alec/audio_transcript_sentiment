@@ -1,5 +1,3 @@
-# src/inference.py
-
 import torch
 import torch.nn.functional as F
 import torchaudio
@@ -11,11 +9,11 @@ from src.multimodal import MultimodalSentimentClassifier
 def transcribe(audio_path: str) -> str:
     processor = Wav2Vec2Processor.from_pretrained(
         "jonatasgrosman/wav2vec2-large-xlsr-53-french",
-        cache_dir="./models"
+        #cache_dir="./models"
     )
     model_ctc = Wav2Vec2ForCTC.from_pretrained(
         "jonatasgrosman/wav2vec2-large-xlsr-53-french",
-        cache_dir="./models"
+        #cache_dir="./models"
     )
 
     waveform, sr = torchaudio.load(audio_path)

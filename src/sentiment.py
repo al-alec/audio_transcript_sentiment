@@ -1,5 +1,3 @@
-# src/sentiment.py
-
 from transformers import AutoTokenizer, AutoModel, AutoModelForSequenceClassification
 import torch
 import torch.nn.functional as F
@@ -8,15 +6,18 @@ class TextEncoder:
     def __init__(
         self,
         model_name: str = "nlptown/bert-base-multilingual-uncased-sentiment",
-        cache_dir: str = "./models"
+        #model_name: str = "alec228/audio-sentiment/tree/main/bert-sentiment",
+        #cache_dir: str = "./models"
     ):
         # Tokenizer pour prétraiter le texte
         self.tokenizer = AutoTokenizer.from_pretrained(
-            model_name, cache_dir=cache_dir
+            model_name,
+            #cache_dir=cache_dir
         )
         # Modèle BERT de base (sans tête de classification)
         self.model = AutoModel.from_pretrained(
-            model_name, cache_dir=cache_dir
+            model_name,
+            #cache_dir=cache_dir
         )
 
     def extract_features(self, texts: list[str]) -> torch.Tensor:
@@ -45,10 +46,12 @@ class TextEncoder:
         """
         # Chargement du tokenizer et du modèle de classification
         tokenizer = AutoTokenizer.from_pretrained(
-            "nlptown/bert-base-multilingual-uncased-sentiment", cache_dir="./models"
+            "nlptown/bert-base-multilingual-uncased-sentiment",
+            #cache_dir="./models"
         )
         model = AutoModelForSequenceClassification.from_pretrained(
-            "nlptown/bert-base-multilingual-uncased-sentiment", cache_dir="./models"
+            "nlptown/bert-base-multilingual-uncased-sentiment",
+            #cache_dir="./models"
         )
 
         # Préparation

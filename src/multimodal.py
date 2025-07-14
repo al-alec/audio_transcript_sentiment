@@ -1,5 +1,3 @@
-# src/multimodal.py
-
 from .transcription import SpeechEncoder
 from .sentiment     import TextEncoder
 import torch
@@ -9,19 +7,21 @@ class MultimodalSentimentClassifier(nn.Module):
     def __init__(
         self,
         wav2vec_name: str = "jonatasgrosman/wav2vec2-large-xlsr-53-french",
+        #wav2vec_name: str = "alec228/audio-sentiment/tree/main/wav2vec2",
         bert_name:    str = "nlptown/bert-base-multilingual-uncased-sentiment",
-        cache_dir:    str = "./models",
+        #bert_name:    str = "alec228/audio-sentiment/tree/main/bert-sentiment",
+        #cache_dir:    str = "./models",
         hidden_dim:   int = 256,
         n_classes:    int = 3
     ):
         super().__init__()
         self.speech_encoder = SpeechEncoder(
             model_name=wav2vec_name,
-            cache_dir=cache_dir
+      #      cache_dir=cache_dir
         )
         self.text_encoder = TextEncoder(
             model_name=bert_name,
-            cache_dir=cache_dir
+          #  cache_dir=cache_dir
         )
         dim_a = self.speech_encoder.model.config.hidden_size
         dim_t = self.text_encoder.model.config.hidden_size

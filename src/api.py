@@ -1,11 +1,10 @@
-# src/api.py
-
 import tempfile
 import os
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
 import torch.nn.functional as F
 import torchaudio
+import torch
 
 from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC
 from src.transcription import SpeechEncoder
@@ -20,10 +19,12 @@ app = FastAPI(
 # Précharge des modèles
 processor_ctc = Wav2Vec2Processor.from_pretrained(
     "jonatasgrosman/wav2vec2-large-xlsr-53-french",
+    #"jonatasgrosman/wav2vec2-large-xlsr-53-french",
     cache_dir="./models"
 )
 model_ctc = Wav2Vec2ForCTC.from_pretrained(
     "jonatasgrosman/wav2vec2-large-xlsr-53-french",
+    #"alec228/audio-sentiment/tree/main/wav2vec2",
     cache_dir="./models"
 )
 speech_enc = SpeechEncoder()

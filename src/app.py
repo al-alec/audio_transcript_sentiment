@@ -15,9 +15,11 @@ from src.sentiment import TextEncoder
 # Préchargement des modèles
 processor_ctc = Wav2Vec2Processor.from_pretrained(
     "jonatasgrosman/wav2vec2-large-xlsr-53-french", cache_dir="./models"
+    #"alec228/audio-sentiment/tree/main/wav2vec2", cache_dir="./models"
 )
 model_ctc = Wav2Vec2ForCTC.from_pretrained(
     "jonatasgrosman/wav2vec2-large-xlsr-53-french", cache_dir="./models"
+    #"alec228/audio-sentiment/tree/main/wav2vec2", cache_dir="./models"
 )
 
 speech_enc = SpeechEncoder()

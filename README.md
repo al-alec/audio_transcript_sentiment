@@ -4,20 +4,22 @@ Ce projet propose un pipeline complet d’analyse de sentiment à partir de fich
 
 1. **Transcription audio**  
    - Modèle Wav2Vec2 (`jonatasgrosman/wav2vec2-large-xlsr-53-french`)  
-   - Extraction de vecteurs audio puis décodage CTC  
-
+   - Extraction de vecteurs audio puis décodage CTC
+   
 2. **Analyse de sentiment textuel**  
    - Modèle BERT multilingue (`nlptown/bert-base-multilingual-uncased-sentiment`)  
-   - Fonction `analyze_sentiment(text)` retournant un label (`négatif`, `neutre`, `positif`) et sa confiance  
-
+   - Fonction `analyze_sentiment(text)` retournant un label (`négatif`, `neutre`, `positif`) et sa confiance
+   
 3. **Interface utilisateur Gradio**  
    - Modes d’entrée : **enregistrement microphone** et **téléversement de fichier**  
    - Affichage de la transcription et du score de sentiment en temps réel  
+   ![Interface Gradio](home.png)
 
 4. **API REST FastAPI**  
    - Endpoint `/predict` pour soumettre un fichier audio  
    - Retour JSON `{ "transcription": ..., "sentiment": {label: confiance} }`  
-   - Documentation interactive Swagger UI (`/docs`)
+   - Documentation interactive Swagger UI (`/docs`)  
+   ![Documentation API](api.png)
 
 ---
 
@@ -25,6 +27,8 @@ Ce projet propose un pipeline complet d’analyse de sentiment à partir de fich
 
 ```
 sentiment_audio_tp/
+├── hf_model/              # exports de modèles sauvegardés via save_pretrained
+├── models/                # cache local HuggingFace (ignoré par Git)
 ├── src/
 │   ├── __init__.py
 │   ├── transcription.py   # SpeechEncoder (Wav2Vec2Model)
@@ -33,9 +37,8 @@ sentiment_audio_tp/
 │   ├── inference.py       # CLI (audio → transcription + sentiment)
 │   ├── app.py             # Interface Gradio
 │   └── api.py             # Serveur FastAPI
-├── models/                # Cache local des modèles HuggingFace
-├── venv/                  # Environnement virtuel Python
 ├── requirements.txt       # Dépendances du projet
+├── render.yaml            # Infra as code pour Render
 └── README.md              # Ce document
 ```
 
@@ -93,7 +96,8 @@ uvicorn src.api:app --reload --host 0.0.0.0 --port 8000
 - Tester avec `curl` ou Postman :
 
   ```bash
-  curl -X POST "http://127.0.0.1:8000/predict"        -F "file=@/chemin/vers/audio.wav"
+  curl -X POST "http://127.0.0.1:8000/predict" \
+       -F "file=@/chemin/vers/audio.wav"
   ```
 
 ---
@@ -119,3 +123,4 @@ uvicorn src.api:app --reload --host 0.0.0.0 --port 8000
 ## Licence
 
 Licence **MIT** — libre d’utilisation, modification et redistribution.
+```
