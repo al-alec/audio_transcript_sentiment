@@ -91,26 +91,22 @@ def export_history_csv(history):
 
 demo = gr.Blocks(theme=gr.themes.Monochrome(primary_hue="purple"))
 with demo:
-    gr.Markdown("# 🎤 Chat & Analyse de Sentiment Audio")
+    gr.Markdown("# Chat & Analyse de Sentiment Audio")
 
     gr.HTML("""
     <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
         <div style="background-color: #f3e8ff; padding: 12px 20px; border-radius: 12px; border-left: 5px solid #8e44ad;">
-            <strong>Étape 1️⃣ :</strong> Enregistrez votre voix ou téléversez un fichier audio (format WAV recommandé).
+            <strong>Étape 1 :</strong> Enregistrez votre voix ou téléversez un fichier audio (format WAV recommandé).
         </div>
         <div style="background-color: #e0f7fa; padding: 12px 20px; border-radius: 12px; border-left: 5px solid #0097a7;">
-            <strong>Étape 2️⃣ :</strong> Cliquez sur le bouton <em><b>Analyser</b></em> pour lancer la transcription et l’analyse.
+            <strong>Étape 2 :</strong> Cliquez sur le bouton <em><b>Analyser</b></em> pour lancer la transcription et l’analyse.
         </div>
         <div style="background-color: #fff3e0; padding: 12px 20px; border-radius: 12px; border-left: 5px solid #fb8c00;">
-            <strong>Étape 3️⃣ :</strong> Visualisez les résultats : transcription, sentiment, et analyse détaillée.
+            <strong>Étape 3 :</strong> Visualisez les résultats : transcription, sentiment, et analyse détaillée.
         </div>
         <div style="background-color: #e8f5e9; padding: 12px 20px; border-radius: 12px; border-left: 5px solid #43a047;">
-            <strong>Étape 4️⃣ :</strong> Exportez l’historique des analyses au format CSV si besoin.
+            <strong>Étape 4 :</strong> Exportez l’historique des analyses au format CSV si besoin.
         </div>
-    </div>
-
-    <div style="margin-top: 15px;">
-        📄 <span id="swagger-link" style="font-weight: bold; color: #6a1b9a;"></span>
     </div>
 
     <script>
@@ -127,10 +123,10 @@ with demo:
             export_btn = gr.Button("Exporter CSV")
         with gr.Column(scale=3):
             chat = gr.Chatbot(label="Historique des échanges")
-            transcription_out = gr.Textbox(label="📝 Transcription", interactive=False)
-            summary_out = gr.HTML(label="🎯 Sentiment")
-            seg_out = gr.Dataframe(label="📌 Détail par segment")
-            hist_out = gr.Dataframe(label="🕘 Historique")
+            transcription_out = gr.Textbox(label="Transcription", interactive=False)
+            summary_out = gr.HTML(label="Sentiment")
+            seg_out = gr.Dataframe(label="Détail par segment")
+            hist_out = gr.Dataframe(label="Historique")
 
     state_chat = gr.State([])  # list of (user,bot)
     state_hist = gr.State([])  # list of dict entries
@@ -154,11 +150,7 @@ with demo:
         outputs=[gr.File(label="Télécharger CSV")]
     )
 
+
+
 if __name__ == "__main__":
-    import os
-    port = int(os.environ.get("PORT", 7861))
-    demo.launch(
-        server_name="0.0.0.0",
-        server_port=port,
-        share=False  # pas de lien temporaire
-    )
+    demo.launch()

@@ -7,8 +7,8 @@ import torchaudio
 class SpeechEncoder:
     def __init__(
         self,
-        #model_name: str = "jonatasgrosman/wav2vec2-large-xlsr-53-french",
-        model_name: str = "alec228/audio-sentiment/tree/main/wav2vec2",
+        model_name: str = "jonatasgrosman/wav2vec2-large-xlsr-53-french",
+        #model_name: str = "alec228/audio-sentiment/tree/main/wav2vec2",
         cache_dir: str = "./models"
     ):
         # Processor pour prétraiter l'audio
